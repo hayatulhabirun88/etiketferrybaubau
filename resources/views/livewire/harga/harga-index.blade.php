@@ -21,15 +21,7 @@
                                 <span style="color:red; font-size:12px;">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="mobil" class="form-label">Mobil</label>
-                            <input type="text" class="form-control" name="mobil" id="mobil"
-                                aria-describedby="helpId" placeholder="Harga Tiket Mobil" wire:model="mobil"
-                                tabindex="3">
-                            @error('mobil')
-                                <span style="color:red; font-size:12px;">{{ $message }}</span>
-                            @enderror
-                        </div>
+
 
                     </div>
                     <div class="col-md-6">
@@ -42,17 +34,45 @@
                                 <span style="color:red; font-size:12px;">{{ $message }}</span>
                             @enderror
                         </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="motor" class="form-label">Motor</label>
+                            <input type="text" class="form-control" name="motor" id="motor"
+                                aria-describedby="helpId" placeholder="Harga Tiket Motor" wire:model="motor"
+                                tabindex="3">
+                            @error('motor')
+                                <span style="color:red; font-size:12px;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="mobil" class="form-label">Mobil</label>
+                            <input type="text" class="form-control" name="mobil" id="mobil"
+                                aria-describedby="helpId" placeholder="Harga Tiket Mobil" wire:model="mobil"
+                                tabindex="4">
+                            @error('mobil')
+                                <span style="color:red; font-size:12px;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label for="truk" class="form-label">Truk</label>
                             <input type="text" class="form-control" name="truk" id="truk"
                                 aria-describedby="helpId" placeholder="Harga Tiket truk" wire:model="truk"
-                                tabindex="4">
+                                tabindex="5">
                             @error('truk')
                                 <span style="color:red; font-size:12px;">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                 </div>
+
                 <button type="submit" wire:click.prevent="{{ $isEdit ? 'update' : 'store' }}"
                     class="btn btn-primary">{{ $isEdit ? 'Ubah' : 'Tambah' }}</button>
                 @if ($isEdit)
@@ -76,6 +96,8 @@
                                 </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     EKONOMI</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    MOTOR</th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     MOBIL</th>
@@ -104,6 +126,14 @@
                                                 <div class="my-auto">
                                                     <h6 class="mb-0 text-sm">Rp.
                                                         {{ number_format($harga->ekonomi, 0, '.', ',') }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-3">
+                                                <div class="my-auto">
+                                                    <h6 class="mb-0 text-sm">Rp.
+                                                        {{ number_format($harga->motor, 0, '.', ',') }}</h6>
                                                 </div>
                                             </div>
                                         </td>

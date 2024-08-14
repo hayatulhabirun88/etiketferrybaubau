@@ -4,6 +4,7 @@ namespace App\Livewire\Keberangkatan;
 
 use App\Models\Kapal;
 use Livewire\Component;
+use App\Models\Pelabuhan;
 use Livewire\WithPagination;
 use App\Models\Keberangkatan;
 
@@ -138,6 +139,7 @@ class KeberangkatanIndex extends Component
     {
         $keberangkatan = Keberangkatan::latest()->paginate(10);
         $kapals = Kapal::all();
-        return view('livewire.keberangkatan.keberangkatan-index', compact(['keberangkatan', 'kapals']));
+        $pelabuhan = Pelabuhan::all();
+        return view('livewire.keberangkatan.keberangkatan-index', compact(['keberangkatan', 'kapals', 'pelabuhan']));
     }
 }

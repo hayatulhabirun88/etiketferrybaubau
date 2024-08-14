@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TiketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HargaController;
@@ -31,3 +32,4 @@ Route::get('harga', [HargaController::class, 'index'])->name('harga');
 Route::get('keberangkatan', [KeberangkatanController::class, 'index'])->name('keberangkatan');
 Route::get('history', [HistoriController::class, 'index'])->name('history');
 Route::get('penumpang', [PenumpangController::class, 'index'])->name('penumpang');
+Route::get('tiket', [TiketController::class, 'index'])->name('tiket');

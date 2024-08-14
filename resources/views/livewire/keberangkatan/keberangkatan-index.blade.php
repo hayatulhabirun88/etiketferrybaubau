@@ -42,8 +42,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="berangkat" class="form-label">Berangkat</label>
-                            <input type="text" class="form-control" name="berangkat" id="berangkat"
-                                aria-describedby="helpId" placeholder="Berangkat" wire:model="berangkat">
+                            <select name="berangkat" class="form-control" id="berangkat" wire:model="berangkat">
+                                <option value="">Dari</option>
+                                @foreach ($pelabuhan as $plbh)
+                                    <option value="{{ $plbh->id }}">{{ $plbh->nama_pelabuhan }}</option>
+                                @endforeach
+                            </select>
                             @error('berangkat')
                                 <span style="color:red; font-size:12px;">{{ $message }}</span>
                             @enderror
@@ -60,8 +64,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="tujuan" class="form-label">Tujuan</label>
-                            <input type="text" class="form-control" name="tujuan" id="tujuan"
-                                aria-describedby="helpId" placeholder="Tujuan" wire:model="tujuan">
+                            <select name="tujuan" class="form-control" id="tujuan" wire:model="tujuan">
+                                <option value="">Ke</option>
+                                @foreach ($pelabuhan as $plbh)
+                                    <option value="{{ $plbh->id }}">{{ $plbh->nama_pelabuhan }}</option>
+                                @endforeach
+                            </select>
                             @error('tujuan')
                                 <span style="color:red; font-size:12px;">{{ $message }}</span>
                             @enderror
@@ -112,12 +120,15 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $kbr->berangkat }}<br>
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ \App\Models\Pelabuhan::find($kbr->berangkat)->nama_pelabuhan }}<br>
                                                 {{ $kbr->jam_keberangkatan }} WITA</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                {{ $kbr->tujuan }} <br>{{ $kbr->jam_kedatangan }} WITA</p>
+                                                {{ \App\Models\Pelabuhan::find($kbr->tujuan)->nama_pelabuhan }}
+                                                <br>{{ $kbr->jam_kedatangan }} WITA
+                                            </p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <button class="btn btn-sm btn-warning"

@@ -12,7 +12,7 @@ class HargaIndex extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $vip, $ekonomi, $mobil, $truk, $selectedId;
+    public $vip, $ekonomi, $mobil, $truk, $motor, $selectedId;
 
     public $search = '';
 
@@ -31,23 +31,27 @@ class HargaIndex extends Component
             'ekonomi' => 'required',
             'mobil' => 'required',
             'truk' => 'required',
+            'motor' => 'required',
         ], [
             'vip.required' => 'Harga tiket VIP harus diisi.',
             'ekonomi.required' => 'Harga tiket ekonomi harus diisi.',
             'mobil.required' => 'Harga tiket mobil harus diisi.',
             'truk.required' => 'Harga tiket truk harus diisi.',
+            'motor.required' => 'Harga tiket truk harus diisi.',
         ]);
 
         $vip = preg_replace("/[^0-9]/", "", $this->vip);
         $ekonomi = preg_replace("/[^0-9]/", "", $this->ekonomi);
         $mobil = preg_replace("/[^0-9]/", "", $this->mobil);
         $truk = preg_replace("/[^0-9]/", "", $this->truk);
+        $motor = preg_replace("/[^0-9]/", "", $this->motor);
 
         Harga::create([
             'vip' => $vip,
             'ekonomi' => $ekonomi,
             'mobil_standar' => $mobil,
             'mobil_truk' => $truk,
+            'motor' => $motor,
         ]);
 
         session()->flash('success', 'Data Kapal Berhasil Ditambahkan.');
@@ -62,6 +66,7 @@ class HargaIndex extends Component
         $this->ekonomi = number_format($harga->ekonomi, 0, '.', ',');
         $this->mobil = number_format($harga->mobil_standar, 0, '.', ',');
         $this->truk = number_format($harga->mobil_truk, 0, '.', ',');
+        $this->motor = number_format($harga->motor, 0, '.', ',');
         $this->isEdit = true;
     }
 
@@ -72,11 +77,13 @@ class HargaIndex extends Component
             'ekonomi' => 'required',
             'mobil' => 'required',
             'truk' => 'required',
+            'motor' => 'required',
         ], [
             'vip.required' => 'Harga tiket VIP harus diisi.',
             'ekonomi.required' => 'Harga tiket ekonomi harus diisi.',
             'mobil.required' => 'Harga tiket mobil harus diisi.',
             'truk.required' => 'Harga tiket truk harus diisi.',
+            'motor.required' => 'Harga tiket truk harus diisi.',
         ]);
 
         $harga = Harga::find($this->selectedId);
@@ -85,12 +92,14 @@ class HargaIndex extends Component
         $ekonomi = preg_replace("/[^0-9]/", "", $this->ekonomi);
         $mobil = preg_replace("/[^0-9]/", "", $this->mobil);
         $truk = preg_replace("/[^0-9]/", "", $this->truk);
+        $motor = preg_replace("/[^0-9]/", "", $this->motor);
 
         $harga->update([
             'vip' => $vip,
             'ekonomi' => $ekonomi,
             'mobil_standar' => $mobil,
             'mobil_truk' => $truk,
+            'motor' => $motor,
         ]);
 
         session()->flash('success', 'Data Kapal Berhasil Diubah.');
@@ -109,6 +118,7 @@ class HargaIndex extends Component
         $this->ekonomi = '';
         $this->mobil = '';
         $this->truk = '';
+        $this->motor = '';
         $this->isEdit = false;
     }
 
@@ -118,6 +128,7 @@ class HargaIndex extends Component
         $this->ekonomi = '';
         $this->mobil = '';
         $this->truk = '';
+        $this->motor = '';
     }
     public function render()
     {

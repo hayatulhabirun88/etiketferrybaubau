@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->bigInteger('kode_tiket');
             $table->bigInteger('harga_tiket');
             $table->string('fasilitas');
-            $table->string('kendaraan');
-            $table->string('plat');
+            $table->string('kendaraan')->nullable();
+            $table->string('plat')->nullable();
             $table->bigInteger('penumpang_id');
             $table->bigInteger('keberangkatan_id');
             $table->timestamps();
