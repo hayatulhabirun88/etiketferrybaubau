@@ -12,4 +12,9 @@ class History extends Model
     protected $table = 'histories';
 
     protected $guarded = [];
+
+    public function tiket()
+    {
+        return $this->belongsTo(Tiket::class);
+    }
 }

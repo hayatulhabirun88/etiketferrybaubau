@@ -9,7 +9,6 @@
                 </div>
                 <div class="card-body">
                     <form id="form-login" wire:submit.prevent="login">
-                        @csrf
                         <label>Email</label>
                         <div class="mb-3">
                             <input type="email" class="form-control" placeholder="Email" aria-label="Email"

@@ -15,7 +15,7 @@ class TiketIndex extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $nik, $nama_penumpang, $alamat, $no_hp, $user_id, $selectedId, $jadwal, $berangkat, $tujuan, $totalHargaTiket, $ekonomi, $vip, $motor, $mobil, $truk;
+    public $nik, $nama_penumpang, $alamat, $no_hp, $user_id, $selectedId, $jadwal, $berangkat, $tujuan, $totalHargaTiket, $ekonomi, $vip, $motor, $mobil, $truk, $plat_no;
 
     public $search = '';
 
@@ -164,10 +164,35 @@ class TiketIndex extends Component
 
     }
 
-    public function pesan($id)
+    public function pesanTiket($id)
     {
-        $keberangkatan = Keberangkatan::find($id);
-        dd($keberangkatan);
+        $this->resetSesssion();
+
+        $keberangkatan = Keberangkatan::findOrFail($id);
+        $properties = ['ekonomi', 'vip', 'motor', 'mobil', 'truk'];
+
+        foreach ($properties as $property) {
+            if ($this->$property > 0) {
+                session()->put($property, $this->$property);
+            }
+        }
+
+        session()->put('keberangkatan', $keberangkatan);
+        session()->put('total_harga', $this->totalHargaTiket);
+
+        return redirect()->route('tiket.pesan_tiket');
+
+    }
+
+    public function resetSesssion()
+    {
+        session()->forget('ekonomi');
+        session()->forget('vip');
+        session()->forget('motor');
+        session()->forget('mobil');
+        session()->forget('truk');
+        session()->forget('keberangkatan');
+        session()->forget('total_harga');
     }
 
     public function render()

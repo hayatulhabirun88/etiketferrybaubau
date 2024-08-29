@@ -33,3 +33,6 @@ Route::get('keberangkatan', [KeberangkatanController::class, 'index'])->name('ke
 Route::get('history', [HistoriController::class, 'index'])->name('history');
 Route::get('penumpang', [PenumpangController::class, 'index'])->name('penumpang');
 Route::get('tiket', [TiketController::class, 'index'])->name('tiket');
+Route::get('tiket/pesan_tiket', [TiketController::class, 'pesan_tiket'])->name('tiket.pesan_tiket');
+Route::get('tiket/list', [TiketController::class, 'list'])->name('tiket.list');
+Route::get('tiket/{id}/cetak', [TiketController::class, 'cetak'])->name('tiket.list.cetak');

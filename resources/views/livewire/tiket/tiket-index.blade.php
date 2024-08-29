@@ -107,114 +107,76 @@
         </div>
     </div>
 
-    @if ($openJadwal)
-        <div class="col-md-8">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6 class="d-flex">Daftar Keberangkatan Kapal Ferry</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6 class="d-flex">Daftar Keberangkatan Kapal Ferry</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Jadwal
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Berangkat</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Tiba</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Total Harga Tiket</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($hasilPencarian as $kbr)
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Jadwal
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Berangkat</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tiba</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Total Harga Tiket</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($hasilPencarian as $kbr)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-3">
-                                                <div class="my-auto">
-                                                    <h6 class="mb-0 text-sm">{{ $kbr->kapal->nama_kapal }}</h6>
-                                                    <p class="text-xs font-weight-bold mb-0">{{ $kbr->jadwal }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ \App\Models\Pelabuhan::find($kbr->berangkat)->nama_pelabuhan }}<br>
-                                                {{ $kbr->jam_keberangkatan }} WITA</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ \App\Models\Pelabuhan::find($kbr->tujuan)->nama_pelabuhan }}
-                                                <br>{{ $kbr->jam_kedatangan }} WITA
-                                            </p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p>{{ number_format($totalHargaTiket, 0, '.', ',') }}</p>
-
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-sm btn-primary"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                Pesan
-                                            </button>
-
-                                        </td>
-                                    </tr>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="nama" class="form-label">Nama</label>
-                                                        <input type="text" class="form-control" name="nama"
-                                                            id="nama" aria-describedby="helpId" placeholder=""
-                                                            wire:model="nama" />
-                                                        @error('nama')
-                                                            <span
-                                                                style="color:red; font-size:12px;">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save
-                                                        changes</button>
-                                                </div>
+                                    <td>
+                                        <div class="d-flex px-3">
+                                            <div class="my-auto">
+                                                <h6 class="mb-0 text-sm">{{ $kbr->kapal->nama_kapal }}</h6>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $kbr->jadwal }}
+                                                </p>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            {{ \App\Models\Pelabuhan::find($kbr->berangkat)->nama_pelabuhan }}<br>
+                                            {{ $kbr->jam_keberangkatan }} WITA</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            {{ \App\Models\Pelabuhan::find($kbr->tujuan)->nama_pelabuhan }}
+                                            <br>{{ $kbr->jam_kedatangan }} WITA
+                                        </p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p>{{ number_format($totalHargaTiket, 0, '.', ',') }}</p>
 
-                            </tbody>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <!-- Button trigger modal -->
+                                        <button type="submit" class="btn btn-sm btn-primary"
+                                            wire:click.prevent="pesanTiket({{ $kbr->id }})">Pesan</button>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
 
 
-                        </table>
-                    </div>
+                    </table>
                 </div>
             </div>
         </div>
-    @endif
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
