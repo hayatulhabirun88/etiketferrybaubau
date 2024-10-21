@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Mobile\HomeMobileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -25,7 +26,10 @@ use App\Http\Controllers\Mobile\LoginMobileController;
 
 
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/pesan-tiket', [FrontController::class, 'pesan_tiket'])->name('front.pesan_tiket');
+Route::get('/tiket-list', [FrontController::class, 'tiket_list'])->name('front.tiket_list');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
