@@ -9,7 +9,7 @@ use App\Models\Keberangkatan;
 
 class Index extends Component
 {
-    public $jadwal, $berangkat, $tujuan, $tanggal, $vip, $ekonomi, $motor, $mobil, $truk, $totalHargaTiket;
+    public $jadwal, $berangkat, $tujuan, $vip, $ekonomi, $motor, $mobil, $truk, $totalHargaTiket;
     public $hasilPencarian = [];
 
     public function cek_jadwal()
@@ -22,7 +22,7 @@ class Index extends Component
             'truk' => 'min:0',
             'berangkat' => 'required',
             'tujuan' => 'required',
-            'tanggal' => 'required',
+            'jadwal' => 'required',
         ], [
             'vip.min' => 'Jumlah VIP tidak boleh kurang dari 0.',
             'ekonomi.min' => 'Jumlah Ekonomi tidak boleh kurang dari 0.',
@@ -31,7 +31,7 @@ class Index extends Component
             'truk.min' => 'Jumlah Truk tidak boleh kurang dari 0.',
             'berangkat.required' => 'Pelabuhan berangkat harus diisi.',
             'tujuan.required' => 'Pelabuhan tujuan harus diisi.',
-            'tanggal.required' => 'Tanggal keberangkatan harus diisi.',
+            'jadwal.required' => 'Jadwal keberangkatan harus diisi.',
         ]);
 
         if ($this->vip < 0 || $this->ekonomi < 0 || $this->motor < 0 || $this->mobil < 0 || $this->truk < 0) {
@@ -39,13 +39,14 @@ class Index extends Component
             return;
         }
         $this->hasilPencarian = Keberangkatan::query()
-            ->where('jadwal', 'like', '%' . $this->tanggal . '%')
             ->where(function ($query) {
                 $query->where('berangkat', $this->berangkat)
                     ->where('tujuan', $this->tujuan);
             })
             ->latest()
             ->get();
+
+        session()->put('jadwal', $this->jadwal);
 
         $harga = Harga::first();
         $this->ekonomi = $this->ekonomi ?? 0;

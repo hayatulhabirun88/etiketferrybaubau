@@ -8,6 +8,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Tanggal</th>
                             <th>Kode Tiket</th>
                             <th>Total Harga Tiket</th>
                             <th>Fasilitas</th>
@@ -20,6 +21,7 @@
                     <tbody>
                         @foreach ($tiket as $tkt)
                             <tr>
+                                <td>{{ $tkt->created_at }}</td>
                                 <td>{{ $tkt->kode_tiket }}</td>
                                 <td>{{ number_format($tkt->harga_tiket) }}</td>
                                 <td>{{ $tkt->fasilitas }}</td>

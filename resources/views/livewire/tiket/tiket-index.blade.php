@@ -140,7 +140,8 @@
                                         <div class="d-flex px-3">
                                             <div class="my-auto">
                                                 <h6 class="mb-0 text-sm">{{ $kbr->kapal->nama_kapal }}</h6>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $kbr->jadwal }}
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ session()->get('jadwal') }}
                                                 </p>
                                             </div>
                                         </div>

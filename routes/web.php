@@ -29,6 +29,9 @@ use App\Http\Controllers\Mobile\LoginMobileController;
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/pesan-tiket', [FrontController::class, 'pesan_tiket'])->name('front.pesan_tiket');
 Route::get('/tiket-list', [FrontController::class, 'tiket_list'])->name('front.tiket_list');
+Route::get('/payment/success', [FrontController::class, 'success'])->name('front.payment_success');
+Route::get('/payment/pending', [FrontController::class, 'pending'])->name('front.payment_pending');
+Route::get('/front-tiket/{id}/cetak', [FrontController::class, 'cetak'])->name('tiket.list.cetak');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 

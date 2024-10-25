@@ -14,7 +14,7 @@ class KeberangkatanIndex extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $jadwal, $jam_keberangkatan, $jam_kedatangan, $berangkat, $tujuan, $kapal_id, $nama_kapal, $selectedId;
+    public $jam_keberangkatan, $jam_kedatangan, $berangkat, $tujuan, $kapal_id, $nama_kapal, $selectedId;
 
     public $search = '';
 
@@ -29,26 +29,21 @@ class KeberangkatanIndex extends Component
     {
 
         $this->validate([
-            'jadwal' => 'required',
             'jam_keberangkatan' => 'required',
             'jam_kedatangan' => 'required',
-            'berangkat' => 'required|string',
-            'tujuan' => 'required|string',
+            'berangkat' => 'required|integer',
+            'tujuan' => 'required|integer',
             'kapal_id' => 'required|integer',
         ], [
-            'jadwal.required' => 'Jadwal harus diisi.',
             'jam_keberangkatan.required' => 'Jam keberangkatan harus diisi.',
             'jam_kedatangan.required' => 'Jam kedatangan harus diisi.',
             'berangkat.required' => 'Berangkat harus diisi.',
-            'berangkat.string' => 'Berangkat harus berupa teks.',
             'tujuan.required' => 'Tujuan harus diisi.',
-            'tujuan.string' => 'Tujuan harus berupa teks.',
             'kapal_id.required' => 'Nama Kapal harus diisi.',
             'kapal_id.integer' => 'Nama Kapal terjadi kesalahan.',
         ]);
 
         Keberangkatan::create([
-            'jadwal' => $this->jadwal,
             'jam_keberangkatan' => $this->jam_keberangkatan,
             'jam_kedatangan' => $this->jam_kedatangan,
             'berangkat' => $this->berangkat,
@@ -64,7 +59,6 @@ class KeberangkatanIndex extends Component
     {
         $keberangkatan = Keberangkatan::find($id);
         $this->selectedId = $id;
-        $this->jadwal = $keberangkatan->jadwal;
         $this->jam_keberangkatan = $keberangkatan->jam_keberangkatan;
         $this->jam_kedatangan = $keberangkatan->jam_kedatangan;
         $this->berangkat = $keberangkatan->berangkat;
@@ -76,27 +70,22 @@ class KeberangkatanIndex extends Component
     public function update()
     {
         $this->validate([
-            'jadwal' => 'required',
             'jam_keberangkatan' => 'required',
             'jam_kedatangan' => 'required',
-            'berangkat' => 'required|string',
-            'tujuan' => 'required|string',
+            'berangkat' => 'required|integer',
+            'tujuan' => 'required|integer',
             'kapal_id' => 'required|integer',
         ], [
-            'jadwal.required' => 'Jadwal harus diisi.',
             'jam_keberangkatan.required' => 'Jam keberangkatan harus diisi.',
             'jam_kedatangan.required' => 'Jam kedatangan harus diisi.',
             'berangkat.required' => 'Berangkat harus diisi.',
-            'berangkat.string' => 'Berangkat harus berupa teks.',
             'tujuan.required' => 'Tujuan harus diisi.',
-            'tujuan.string' => 'Tujuan harus berupa teks.',
             'kapal_id.required' => 'Nama Kapal harus diisi.',
             'kapal_id.integer' => 'Nama Kapal terjadi kesalahan.',
         ]);
 
         $kapal = Keberangkatan::find($this->selectedId);
         $kapal->update([
-            'jadwal' => $this->jadwal,
             'jam_keberangkatan' => $this->jam_keberangkatan,
             'jam_kedatangan' => $this->jam_kedatangan,
             'berangkat' => $this->berangkat,
@@ -116,7 +105,6 @@ class KeberangkatanIndex extends Component
 
     public function resetTambah()
     {
-        $this->jadwal = '';
         $this->jam_keberangkatan = '';
         $this->jam_kedatangan = '';
         $this->berangkat = '';
@@ -127,7 +115,6 @@ class KeberangkatanIndex extends Component
 
     public function resetForm()
     {
-        $this->jadwal = '';
         $this->jam_keberangkatan = '';
         $this->jam_kedatangan = '';
         $this->berangkat = '';

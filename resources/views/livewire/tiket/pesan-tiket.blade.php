@@ -18,6 +18,14 @@
                         <span style="color:red; font-size:12px;">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                        wire:model="email">
+                    @error('email')
+                        <span style="color:red; font-size:12px;">{{ $message }}</span>
+                    @enderror
+                </div>
 
                 <div class="mb-3">
                     <label for="nama_penumpang" class="form-label">Nama</label>
@@ -73,7 +81,7 @@
                         <tr>
                             <td>Jadwal</td>
                             <td>:&nbsp;</td>
-                            <td>{{ session()->get('keberangkatan')['jadwal'] }}</td>
+                            <td>{{ session()->get('jadwal') }}</td>
                         </tr>
                         <tr>
                             <td>Berangkat</td>

@@ -22,14 +22,6 @@
                         <span style="color:red; font-size:12px;">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <label for="jadwal" class="form-label">Jadwal</label>
-                    <input type="date" class="form-control" name="jadwal" id="jadwal" aria-describedby="helpId"
-                        placeholder="Nama kbr" wire:model="jadwal">
-                    @error('jadwal')
-                        <span style="color:red; font-size:12px;">{{ $message }}</span>
-                    @enderror
-                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -113,7 +105,7 @@
                                         <td>
                                             <div class="d-flex px-3">
                                                 <div class="my-auto">
-                                                    <h6 class="mb-0 text-sm">{{ $kbr->kapal->nama_kapal }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ @$kbr->kapal->nama_kapal }}</h6>
                                                     <p class="text-xs font-weight-bold mb-0">{{ $kbr->jadwal }}
                                                     </p>
                                                 </div>

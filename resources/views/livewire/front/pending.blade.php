@@ -78,6 +78,7 @@
                                         <td>{{ \App\Models\Pelabuhan::find(session()->get('keberangkatan')['tujuan'])->nama_pelabuhan }}
                                             {{ session()->get('keberangkatan')['jam_kedatangan'] }}</td>
                                     </tr>
+
                                     @if (session()->get('ekonomi') > 0)
                                         <tr>
                                             <td>Ekonomi</td>
@@ -120,11 +121,16 @@
                                             <td>{{ number_format(session()->get('total_harga')) ?? '0' }}</td>
                                         </tr>
                                     @endif
-                                </table><br><br>
+                                </table><br>
+                                <div class="alert alert-warning text-center" style="color:white; font-weight:bold;">
+                                    STATUS PENDING
+                                </div>
+                                <p>Kami telah mengirim Jumlah Pembayaran ke Email Anda! Silahkan di proses terlebih
+                                    dahulu.</p>
+                                <br><br>
                                 <div class="text-center">
-                                    <button id="pay-button" type="submit"
-                                        class="btn btn-primary d-block mx-auto">Lakukan
-                                        Pembayaran</button>
+                                    <button id="pay-button" type="submit" class="btn btn-primary d-block mx-auto">Cek
+                                        Status</button>
                                 </div>
 
 
@@ -152,30 +158,4 @@
         </footer>
         <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
     </main>
-
-    <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
-    <script src="{{ env('MIDTRANS_URL') }}" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
-    <script type="text/javascript">
-        document.getElementById('pay-button').onclick = function() {
-            // SnapToken acquired from previous step
-            snap.pay('<?php echo $snapToken; ?>', {
-                // Optional
-                onSuccess: function(result) {
-                    /* You may add your own js here, this is just example */
-                    window.location.href = "/payment/success";
-                },
-                // Optional
-                onPending: function(result) {
-                    /* You may add your own js here, this is just example */
-                    window.location.href = "/payment/pending";
-                },
-                // Optional
-                onError: function(result) {
-                    /* You may add your own js here, this is just example */
-                    window.location.href = "/payment/error";
-                }
-            });
-        };
-    </script>
-
 </div>

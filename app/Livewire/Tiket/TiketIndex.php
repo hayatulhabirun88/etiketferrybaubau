@@ -139,13 +139,14 @@ class TiketIndex extends Component
 
         $this->openJadwal = true;
         $this->hasilPencarian = Keberangkatan::query()
-            ->where('jadwal', 'like', '%' . $this->jadwal . '%')
             ->where(function ($query) {
                 $query->where('berangkat', $this->berangkat)
                     ->where('tujuan', $this->tujuan);
             })
             ->latest()
             ->get();
+
+        session()->put('jadwal', $this->jadwal);
 
         $harga = Harga::first();
         $this->ekonomi = $this->ekonomi ?? 0;

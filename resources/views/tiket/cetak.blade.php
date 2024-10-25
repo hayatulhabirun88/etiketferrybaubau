@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <td><strong>Tanggal</strong></td>
-                <td>: {{ $tiket->keberangkatan->jadwal }}</td>
+                <td>: {{ $tiket->jadwal }}</td>
             </tr>
             <tr>
                 <td><strong>Nama Penumpang</strong></td>

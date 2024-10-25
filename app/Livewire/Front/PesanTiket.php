@@ -62,8 +62,9 @@ class PesanTiket extends Component
             $kendaraan = "";
         }
 
-        $user = User::create([
+        $user = User::updateOrCreate([
             'email' => $this->email,
+        ], [
             'password' => Hash::make('Password123#'),
         ]);
 
@@ -79,6 +80,7 @@ class PesanTiket extends Component
 
         $tiket = Tiket::create([
             'kode_tiket' => $kodeTiket,
+            'jadwal' => session()->get('jadwal'),
             'harga_tiket' => session()->get('total_harga'),
             'fasilitas' => $fasilitas,
             'kendaraan' => $kendaraan,

@@ -20,7 +20,7 @@ class TiketList extends Component
         // Contoh data transaksi
         $params = array(
             'transaction_details' => array(
-                'order_id' => rand(),
+                'order_id' => session()->get('tiket')->kode_tiket,
                 'gross_amount' => session()->get('total_harga'),
             ),
             'customer_details' => array(
@@ -31,7 +31,7 @@ class TiketList extends Component
             ),
             'item_details' => array(
                 array(
-                    'id' => rand(),
+                    'id' => session()->get('tiket')->kode_tiket,
                     'price' => session()->get('total_harga'),
                     'quantity' => 1,
                     'name' => "Pemesanan Tiket " . Kapal::find(session()->get('keberangkatan')['kapal_id'])->nama_kapal . " " . Pelabuhan::find(session()->get('keberangkatan')['berangkat'])->nama_pelabuhan . "-" . Pelabuhan::find(session()->get('keberangkatan')['tujuan'])->nama_pelabuhan,

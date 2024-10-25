@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('keberangkatans', function (Blueprint $table) {
             $table->id();
-            $table->date('jadwal');
             $table->time('jam_keberangkatan');
             $table->time('jam_kedatangan');
             $table->bigInteger('berangkat');

@@ -54,9 +54,9 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <input type="date" class="form-control" placeholder="tanggal"
-                                            aria-label="tanggal" aria-describedby="tanggal-addon" wire:model="tanggal">
-                                        @error('tanggal')
+                                        <input type="date" class="form-control" placeholder="jadwal"
+                                            aria-label="jadwal" aria-describedby="jadwal-addon" wire:model="jadwal">
+                                        @error('jadwal')
                                             <span style="color:red; font-size:12px;">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -167,7 +167,7 @@
                                                                 <h6 class="mb-0 text-sm">{{ $kbr->kapal->nama_kapal }}
                                                                 </h6>
                                                                 <p class="text-xs font-weight-bold mb-0">
-                                                                    {{ $kbr->jadwal }}
+                                                                    {{ session()->get('jadwal') }}
                                                                 </p>
                                                             </div>
                                                         </div>

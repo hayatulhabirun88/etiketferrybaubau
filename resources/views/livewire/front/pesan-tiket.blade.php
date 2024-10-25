@@ -109,7 +109,7 @@
                                     <tr>
                                         <td>Jadwal</td>
                                         <td>:&nbsp;</td>
-                                        <td>{{ session()->get('keberangkatan')['jadwal'] }}</td>
+                                        <td>{{ session()->get('jadwal') }}</td>
                                     </tr>
                                     <tr>
                                         <td>Berangkat</td>
