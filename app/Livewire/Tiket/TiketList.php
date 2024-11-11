@@ -5,6 +5,7 @@ namespace App\Livewire\Tiket;
 use App\Models\Tiket;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class TiketList extends Component
 {
@@ -16,7 +17,14 @@ class TiketList extends Component
 
     public function render()
     {
-        $tiket = Tiket::latest()->paginate(10);
+        if (auth()->user()->level == "member") {
+            $tiket = Tiket::whereHas('penumpang', function ($q) {
+                $q->where('user_id', auth()->user()->id);
+            })->latest()->paginate();
+        } else {
+            $tiket = Tiket::latest()->paginate();
+        }
+
         return view('livewire.tiket.tiket-list', compact('tiket'));
     }
 }

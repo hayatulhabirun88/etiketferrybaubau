@@ -57,15 +57,7 @@
                                             style="color:red; font-size:12px; margin-left:15px;">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" name="email" id="email"
-                                        placeholder="Masukan email" wire:model="email">
-                                    @error('email')
-                                        <span
-                                            style="color:red; font-size:12px; margin-left:15px;">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
                                 <div class="mb-3">
                                     <label for="alamat" class="form-label">Alamat</label>
                                     <textarea name="alamat" id="alamat" cols="30" rows="5" class="form-control" wire:model="alamat"
@@ -86,6 +78,25 @@
                                         @enderror
                                     </div>
                                 @endif
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="email" id="email"
+                                        placeholder="Masukan email" wire:model="email">
+                                    @error('email')
+                                        <span
+                                            style="color:red; font-size:12px; margin-left:15px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" id="password"
+                                        placeholder="Masukan password" wire:model="password">
+                                    @error('password')
+                                        <span
+                                            style="color:red; font-size:12px; margin-left:15px;">{{ $message }}</span>
+                                    @enderror
+                                </div>
 
                                 <button class="btn btn-sm btn-primary" wire:click.prevent="prosesTiket()">Proses
                                     Tiket</button>

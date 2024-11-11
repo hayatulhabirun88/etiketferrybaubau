@@ -12,15 +12,17 @@ use Illuminate\Support\Facades\Session;
 
 class PesanTiket extends Component
 {
-    public $nik, $nama_penumpang, $alamat, $no_hp, $selectedId, $jadwal, $berangkat, $tujuan, $totalHargaTiket, $ekonomi, $vip, $motor, $mobil, $truk, $plat_no, $email;
+    public $nik, $nama_penumpang, $alamat, $no_hp, $selectedId, $jadwal, $berangkat, $tujuan, $totalHargaTiket, $ekonomi, $vip, $motor, $mobil, $truk, $plat_no, $email, $password;
     public function prosesTiket()
     {
+
         $this->validate([
             'nik' => 'required|numeric|digits:16',
             'email' => 'required|email|max:255',
             'nama_penumpang' => 'required|string|max:255',
             'alamat' => 'required|string|max:500',
             'no_hp' => 'required|numeric',
+            'password' => 'required'
         ], [
             'nik.required' => 'NIK harus diisi.',
             'nik.numeric' => 'NIK harus berupa angka.',
@@ -36,6 +38,7 @@ class PesanTiket extends Component
             'alamat.max' => 'Alamat tidak boleh lebih dari 500 karakter.',
             'no_hp.required' => 'Nomor HP harus diisi.',
             'no_hp.numeric' => 'Nomor HP harus berupa angka.',
+            'password.required' => 'Password harus diisi.',
         ]);
 
         if (session()->get('motor') > 0 || session()->get('mobile') > 0 || session()->get('truk') > 0) {
@@ -46,7 +49,7 @@ class PesanTiket extends Component
 
         $kodeTiket = time() . rand(000, 999);
 
-        if ($this->ekonomi > 0) {
+        if (session()->get('ekonomi') > 0) {
             $fasilitas = 'ekonomi';
         } else {
             $fasilitas = 'vip';
@@ -65,7 +68,8 @@ class PesanTiket extends Component
         $user = User::updateOrCreate([
             'email' => $this->email,
         ], [
-            'password' => Hash::make('Password123#'),
+            'password' => Hash::make($this->password),
+            'level' => 'member',
         ]);
 
         $penumpang = Penumpang::updateOrCreate(
