@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Tiket;
 
+use Carbon\Carbon;
 use App\Models\Harga;
 use App\Models\Tiket;
 use Livewire\Component;
@@ -129,11 +130,21 @@ class TiketIndex extends Component
     public function cari()
     {
         $this->validate([
+            'jadwal' => 'required|date|after_or_equal:' . Carbon::now()->subDay()->toDateTimeString(),
             'vip' => 'min:0',
             'ekonomi' => 'min:0',
             'motor' => 'min:0',
             'mobil' => 'min:0',
             'truk' => 'min:0',
+        ], [
+            'jadwal.required' => 'Jadwal harus diisi.',
+            'jadwal.date' => 'Jadwal harus berupa format tanggal yang valid.',
+            'jadwal.after_or_equal' => 'Jadwal harus lebih atau sama dengan tanggal sekarang.',
+            'vip.min' => 'Jumlah VIP tidak boleh kurang dari 0.',
+            'ekonomi.min' => 'Jumlah Ekonomi tidak boleh kurang dari 0.',
+            'motor.min' => 'Jumlah Motor tidak boleh kurang dari 0.',
+            'mobil.min' => 'Jumlah Mobil tidak boleh kurang dari 0.',
+            'truk.min' => 'Jumlah Truk tidak boleh kurang dari 0.',
         ]);
 
 
@@ -143,7 +154,8 @@ class TiketIndex extends Component
                 $query->where('berangkat', $this->berangkat)
                     ->where('tujuan', $this->tujuan);
             })
-            ->latest()
+            ->whereTime('jam_keberangkatan', '>', Carbon::now()->format('H:i:s'))  // Compare only the time part using Carbon
+            ->orderBy('jam_keberangkatan', 'asc')  // Order by the time of departure (ascending)
             ->get();
 
         session()->put('jadwal', $this->jadwal);

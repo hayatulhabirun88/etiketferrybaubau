@@ -114,7 +114,8 @@
                                     <tr>
                                         <td>Nama Kapal</td>
                                         <td>:&nbsp;</td>
-                                        <td>{{ \App\Models\Kapal::find(session()->get('keberangkatan')['kapal_id'])->nama_kapal }}
+                                        <td>
+                                            {{ \App\Models\Kapal::find(session()->get('keberangkatan')['kapal_id'])->nama_kapal }}
                                         </td>
                                     </tr>
                                     <tr>

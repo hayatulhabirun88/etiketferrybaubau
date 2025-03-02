@@ -36,4 +36,6 @@ class TiketController extends Controller
         return view('tiket.cetak', compact('tiket'));
     }
 
+
+
 }

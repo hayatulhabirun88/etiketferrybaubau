@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '../../vendor/autoload.php';
+
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Mobile\HomeMobileController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,8 @@ Route::get('/tiket-list', [FrontController::class, 'tiket_list'])->name('front.t
 Route::get('/payment/success', [FrontController::class, 'success'])->name('front.payment_success');
 Route::get('/payment/pending', [FrontController::class, 'pending'])->name('front.payment_pending');
 Route::get('/front-tiket/{id}/cetak', [FrontController::class, 'cetak'])->name('tiket.list.cetak');
+Route::get('email/{id}', [FrontController::class, 'email'])->name('tiket.email');
+
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -45,6 +49,7 @@ Route::get('tiket', [TiketController::class, 'index'])->name('tiket');
 Route::get('tiket/pesan_tiket', [TiketController::class, 'pesan_tiket'])->name('tiket.pesan_tiket');
 Route::get('tiket/list', [TiketController::class, 'list'])->name('tiket.list');
 Route::get('tiket/{id}/cetak', [TiketController::class, 'cetak'])->name('tiket.list.cetak');
+
 
 //MOBILE
 Route::get('m/login', [LoginMobileController::class, 'index'])->name('mobile.login');

@@ -18,7 +18,7 @@
                 <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
 
                     <li class="nav-item">
-                        <a class="nav-link me-2" href="/login">
+                        <a class="nav-link me-2 btn btn-primary" href="/login">
                             <i class="fas fa-key opacity-6  me-1"></i>
                             Masuk
                         </a>

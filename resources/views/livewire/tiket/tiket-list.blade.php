@@ -27,7 +27,7 @@
                                 <td>{{ $tkt->fasilitas }}</td>
                                 <td>{{ $tkt->kendaraan != null ? $tkt->kendaraan : '-' }}</td>
                                 <td>{{ $tkt->plat ?? '-' }}</td>
-                                <td>{{ $tkt->penumpang->nama_penumpang }}</td>
+                                <td>{{ @$tkt->penumpang->nama_penumpang }}</td>
                                 <td><a target="_blank" href="{{ route('tiket.list.cetak', $tkt->id) }}"
                                         class="btn btn-sm btn-warning">cetak</a> <a href=""
                                         class="btn btn-sm btn-danger">Batalkan</a></td>
@@ -38,6 +38,11 @@
 
 
                 </table>
+                <div class="card">
+                    <div class="card-body">
+                        {{ $tiket->links() }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

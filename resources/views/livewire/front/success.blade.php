@@ -9,7 +9,8 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8 text-center mx-auto">
-                            <h1 class="text-white mb-2 mt-5">Pemesanan Berhasil! Segera Lakukan Pembayaran</h1>
+                            <h1 class="text-white mb-2 mt-5">Proses Pembayaran anda telah Berhasil! Silahkan cetak tiket
+                                anda.</h1>
                             <p class="text-lead text-white">Website Resmi reservasi tiket Kapal Ferry Kota Baubau.</p>
                         </div>
                     </div>
@@ -125,16 +126,38 @@
                                 <div class="alert alert-warning text-center" style="color:white; font-weight:bold;">
                                     STATUS PEMBAYARAN BERHASIL
                                 </div>
-                                <p>Kami telah mengirim Jumlah Pembayaran ke Email Anda! Silahkan di proses terlebih
-                                    dahulu.</p>
+
                                 <br><br>
                                 <div class="text-center">
                                     <a target="_blank" href="/front-tiket/{{ session()->get('tiket')->id }}/cetak"
                                         type="submit" class="btn btn-primary d-block mx-auto">Cetak
                                         Tiket Anda</a>
                                 </div>
+                                <div class="text-center">
+                                    <button type="submit"
+                                        wire:click.prevent="kirimTiket({{ session()->get('tiket')->id }})"
+                                        class="btn btn-success d-block mx-auto">
+                                        <!-- Teks saat loading belum aktif -->
+                                        <span wire:loading.remove
+                                            wire:target="kirimTiket({{ session()->get('tiket')->id }})">
+                                            Kirim Tiket Ke Email
+                                        </span>
 
+                                        <!-- Teks saat loading aktif -->
+                                        <span wire:loading wire:target="kirimTiket({{ session()->get('tiket')->id }})">
+                                            Loading...
+                                        </span>
 
+                                    </button>
+                                </div>
+
+                                @if (session()->has('success'))
+                                    <div class="alert alert-success">{{ session('success') }}</div>
+                                @endif
+
+                                @if (session()->has('error'))
+                                    <div class="alert alert-error">{{ session('error') }}</div>
+                                @endif
                             </div>
                         </div>
                     </div>

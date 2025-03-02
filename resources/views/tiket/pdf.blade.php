@@ -53,7 +53,7 @@
     <div class="ticket">
         <table>
             <tr>
-                <td><img src="{{ asset('/') }}logo.png" width="80" alt=""></td>
+                <td><img src="{{ public_path('logo.png') }}" width="80" alt=""></td>
                 <td>
                     <h4>PT. Dharma Lautan Utama Cab. Baubau <br><small>Jl. MH Thamrin No. 3 Baubau <br> Telp:
                             (0402)2826832</small>
@@ -73,27 +73,15 @@
             </tr>
             <tr>
                 <td><strong>Nama Penumpang</strong></td>
-                <td>: {{ @$tiket->penumpang->nama_penumpang }}</td>
+                <td>: {{ $tiket->penumpang->nama_penumpang }}</td>
             </tr>
             <tr>
                 <td><strong>Berangkat</strong></td>
-                <td>:
-                    @if (isset($tiket->keberangkatan) && @$tiket->keberangkatan->berangkat)
-                        {{ \App\Models\Pelabuhan::find(@$tiket->keberangkatan->berangkat)->nama_pelabuhan }}
-                    @else
-                        -
-                    @endif
-                </td>
+                <td>: {{ \App\Models\Pelabuhan::find($tiket->keberangkatan->berangkat)->nama_pelabuhan }}</td>
             </tr>
             <tr>
                 <td><strong>Tujuan</strong></td>
-                <td>:
-                    @if (isset($tiket->keberangkatan) && @$tiket->keberangkatan->tujuan)
-                        {{ \App\Models\Pelabuhan::find(@$tiket->keberangkatan->tujuan)->nama_pelabuhan }}
-                    @else
-                        -
-                    @endif
-                </td>
+                <td>: {{ \App\Models\Pelabuhan::find($tiket->keberangkatan->tujuan)->nama_pelabuhan }}</td>
             </tr>
             <tr>
                 <td><strong>Fasilitas</strong></td>
@@ -116,23 +104,15 @@
 
         </table>
         <br><br>
-        <div class="qrcode" id="qrcode"></div>
+        <div class="qrcode" id="qrcode">
+            <div class="barcode">
+                <img src="data:image/png;base64,{{ $barcode }}" alt="Barcode">
+            </div>
+        </div>
         <br><br>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script>
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: "{{ $tiket->kode_tiket }}",
-            width: 200,
-            height: 200,
-        });
 
-        // Fungsi untuk mencetak halaman secara otomatis setelah QR code selesai di-generate
-        window.onload = function() {
-            window.print();
-        };
-    </script>
 
 </body>
 

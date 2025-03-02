@@ -41,7 +41,7 @@
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">
-                                            {{ $htr->tiket->penumpang->nama_penumpang }}
+                                            {{ @$htr->tiket->penumpang->nama_penumpang }}
                                         </p>
                                     </td>
                                     <td>
@@ -76,6 +76,11 @@
 
 
                     </table>
+                    <div class="card">
+                        <div class="card-body">
+                            {{ $history->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Front;
 
+use Carbon\Carbon;
 use App\Models\Harga;
 use Livewire\Component;
 use App\Models\Pelabuhan;
@@ -15,6 +16,7 @@ class Index extends Component
     public function cek_jadwal()
     {
         $this->validate([
+            'jadwal' => 'required|date|after_or_equal:' . Carbon::now()->subDay()->toDateTimeString(),
             'vip' => 'min:0',
             'ekonomi' => 'min:0',
             'motor' => 'min:0',
@@ -22,7 +24,6 @@ class Index extends Component
             'truk' => 'min:0',
             'berangkat' => 'required',
             'tujuan' => 'required',
-            'jadwal' => 'required',
         ], [
             'vip.min' => 'Jumlah VIP tidak boleh kurang dari 0.',
             'ekonomi.min' => 'Jumlah Ekonomi tidak boleh kurang dari 0.',
@@ -32,6 +33,8 @@ class Index extends Component
             'berangkat.required' => 'Pelabuhan berangkat harus diisi.',
             'tujuan.required' => 'Pelabuhan tujuan harus diisi.',
             'jadwal.required' => 'Jadwal keberangkatan harus diisi.',
+            'jadwal.date' => 'Jadwal harus berupa format tanggal yang valid.',
+            'jadwal.after_or_equal' => 'Jadwal harus lebih atau sama dengan tanggal dan waktu satu hari yang lalu.',
         ]);
 
         if ($this->vip < 0 || $this->ekonomi < 0 || $this->motor < 0 || $this->mobil < 0 || $this->truk < 0) {
@@ -43,7 +46,8 @@ class Index extends Component
                 $query->where('berangkat', $this->berangkat)
                     ->where('tujuan', $this->tujuan);
             })
-            ->latest()
+            ->whereTime('jam_keberangkatan', '>', Carbon::now()->format('H:i:s'))  // Compare only the time part using Carbon
+            ->orderBy('jam_keberangkatan', 'asc')  // Order by the time of departure (ascending)
             ->get();
 
         session()->put('jadwal', $this->jadwal);

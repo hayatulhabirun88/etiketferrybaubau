@@ -12,4 +12,9 @@ class Penumpang extends Model
     protected $table = 'penumpangs';
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
